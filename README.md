@@ -1,23 +1,44 @@
 ## HashNWalk: Hash and Random Walk Based Anomaly Detection in Hyperedge Streams
 
 *Given a stream of hyperedges from a time-evolving hypergraph, how can we detect structurally or temoprally anomalous ones? Can we detect them in near real-time using constant space?*
+*Sequences of group interactions, such as emails, online discussions, and co-authorships, are ubiquitous; and they are naturally represented as a stream of hyperedges (i.e.,  sets of nodes). Despite its broad potential applications, anomaly detection in hypergraphs (i.e., sets of hyperedges) has received surprisingly little attention, compared to anomaly detection in graphs. While it is tempting to reduce hypergraphs to graphs and apply existing graph-based methods, according to our experiments, taking higher-order structures of hypergraphs into consideration is worthwhile.*
+*We propose HashNWalk, an incremental algorithm that detects anomalies in a stream of hyperedges. It maintains and updates a constant-size summary of the structural and temporal information about the input stream. Using the summary, which is the form of a proximity matrix, HashNWalk measures the anomalousness of each new hyperedge as it appears. HashNWalk is **(a) Fast:** it processes each hyperedge in near real-time and billions of hyperedges within a few hours, **(b) Space Efficient:** the size of the maintained summary is a user-specific constant, **(c) Effective:** it successfully detects anomalous hyperedges in real-world hypergraphs.*
 
-Sequences of group interactions, such as emails, online discussions, and co-authorships, are ubiquitous; and they are naturally represented as a stream of hyperedges (i.e.,  sets of nodes). Despite its broad potential applications, anomaly detection in hypergraphs (i.e., sets of hyperedges) has received surprisingly little attention, compared to anomaly detection in graphs. While it is tempting to reduce hypergraphs to graphs and apply existing graph-based methods, according to our experiments, taking higher-order structures of hypergraphs into consideration is worthwhile.
+### Datasets
+* Datasets used in the paper is in [data](https://github.com/geonlee0325/HashNWalk/tree/main/data).
+* Input file should be formatted as:
+```
+(nodes) <tab> (timestamp) <tab> (0 = normal/1 = anomaly)
 
-We propose HashNWalk, an incremental algorithm that detects anomalies in a stream of hyperedges. It maintains and updates a constant-size summary of the structural and temporal information about the input stream. Using the summary, which is the form of a proximity matrix, HashNWalk measures the anomalousness of each new hyperedge as it appears. HashNWalk is **(a) Fast:** it processes each hyperedge in near real-time and billions of hyperedges within a few hours, **(b) Space Efficient:** the size of the maintained summary is a user-specific constant, **(c) Effective:** it successfully detects anomalous hyperedges in real-world hypergraphs. 
+e.g.,
+126     9986.0  0
+126,95  10000.0 0
+40,133  4008.0  1
+```
 
-### How to run
-The datasets should be prepared in following format. Each hyperedge is represented as:
+### How to Run
+* To run demos, execute following commend in [code](https://github.com/geonlee0325/HashNWalk/tree/main/code):
+```
+./run.sh
+```
+* In HashNWalk, there are several hyperparameters:
+```
+K:	# of hash functions
+M:	# of supernodes
+alpha:	time-decaying parameter
+agg:	aggregation function (max or mean)
+```
+* To run with specified hyperparameters, execute following commends in [code](https://github.com/geonlee0325/HashNWalk/tree/main/code):
+```
+g++ -O3 -std=c++11 main.cpp -o run;
+./run (dataset) (K) (M) (alpha) (agg)
+```
+* Results will be saved in [results](https://github.com/geonlee0325/HashNWalk/tree/main/results) as:
+```
+(nodes) <tab> (timestamp) <tab> (0 = normal/1 = anomaly) <tab> score_U <tab> score_B
 
-	[nodes] <tab> [timestamp]
-	eg) 0,1,3,5\t2345
-
-To run the code with a toy dataset, execute:
-
-	./run.sh
-
-You can set the hyperparamters in lines 20-22 in main.cpp.
-
-	- K: number of hash functions
-	- M: number of supernodes
-	- alpha: time decaying parameter
+e.g.,
+370,852,173,795,815,261761      9269.468494     0       9.721166        9.721166
+651,497,747,461,699,261762      9269.526367     1       10.414313       10.414313
+602,415,890,382,11,261763       9269.526367     0       9.721166        9.721166
+```
