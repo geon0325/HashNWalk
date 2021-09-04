@@ -17,16 +17,21 @@ int main(int argc, char *argv[])
 	clock_t start;
 
 	string dataname = argv[1];
-	int K = 2;					// number of hash functions
-	int M = 250;					// number of supernodes
-	double alpha = 0.999;				// time decay parameter
-	string inject_type = "_inject_bursty";		// inject type
-	//string inject_type = "";
+    int K = stoi(argv[2]);
+    int M = stoi(argv[3]);
+    double alpha = stod(argv[4]);
+    string aggregate = argv[5];
+    
+	//int K = 2;					// number of hash functions
+	//int M = 600;					// number of supernodes
+	//double alpha = 0.999;				// time decay parameter
+	//string inject_type = "_inject_bursty";		// inject type
+	string inject_type = "";
 	bool edge_dependent = true;
-	string aggregate = "max";
+	//string aggregate = "max";
 
-	string graphFile = "../dataset/" + dataname + "/" + dataname + inject_type + ".txt";
-	string resultFile = "../results/" +  dataname + inject_type + ".txt";
+	string graphFile = "../data/" + dataname + inject_type + ".txt";
+	string resultFile = "../results/" +  dataname + "_" + to_string(K) + "_" + to_string(M) + "_" + to_string(alpha) + "_" + aggregate + ".txt";
 
 	// Read data
 	start = clock();

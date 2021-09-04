@@ -175,7 +175,7 @@ vector<pair<double,double> > HyperAnom::run()
 
 	for (int i = 0; i < this->hyperedges.size(); i++){
 		
-		if (i % 100000 == 0 and i > 0){
+		if (i % 10000 == 0 and i > 0){
 			double runtime = (double)(clock() - start) / CLOCKS_PER_SEC;
 			double expected = (double)this->hyperedges.size() * runtime / i;
 			cout << i << " / " << this->hyperedges.size()
