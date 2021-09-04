@@ -35,6 +35,8 @@ g++ -O3 -std=c++11 main.cpp -o run;
 ```
 * Results will be saved in [results](https://github.com/geonlee0325/HashNWalk/tree/main/results) as:
 ```
+Filename: (dataset)_(K)_(M)_(alpha)_(agg).txt
+
 (nodes) <tab> (timestamp) <tab> (0 = normal/1 = anomaly) <tab> score_U <tab> score_B
 
 e.g.,
