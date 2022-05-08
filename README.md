@@ -7,7 +7,7 @@ Source code for the paper [HashNWalk: Hash and Random Walk Based Anomaly Detecti
 
 ## Datasets
 * Datasets used in the paper is in [data](https://github.com/geonlee0325/HashNWalk/tree/main/data).
-* Input file should be formatted as (it does not to be sorted):
+* Input file should be formatted as (it does not need to be sorted):
 ```
 (nodes) <tab> (timestamp) <tab> (0 = normal/1 = anomaly)
 
