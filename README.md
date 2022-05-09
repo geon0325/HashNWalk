@@ -6,7 +6,7 @@ Source code for the paper [HashNWalk: Hash and Random Walk Based Anomaly Detecti
 *We propose HashNWalk, an incremental algorithm that detects anomalies in a stream of hyperedges. It maintains and updates a constant-size summary of the structural and temporal information about the input stream. Using the summary, which is the form of a proximity matrix, HashNWalk measures the anomalousness of each new hyperedge as it appears. HashNWalk is **(a) Fast:** it processes each hyperedge in near real-time and billions of hyperedges within a few hours, **(b) Space Efficient:** the size of the maintained summary is a user-specific constant, **(c) Effective:** it successfully detects anomalous hyperedges in real-world hypergraphs.*
 
 ## Datasets
-* Datasets used in the paper is in [data](https://github.com/geonlee0325/HashNWalk/tree/main/data).
+* Datasets used in the paper is in [small datasets](https://github.com/geonlee0325/HashNWalk/tree/main/data) and [large datasets](https://drive.google.com/drive/folders/1584HqNjWiilFBIWytKRyeLkTbj2Ywntf?usp=sharing).
 * Input file should be formatted as (it does not need to be sorted):
 ```
 (nodes) <tab> (timestamp) <tab> (0 = normal/1 = anomaly)
